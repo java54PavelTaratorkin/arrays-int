@@ -11,7 +11,7 @@ class ArraysTest {
 	int[] array = {10, 25, 30, 40, 100};
 
 	@Test
-	void addNumnerTest() {
+	void addNumberTest() {
 		int[] arrayExpected = {10, 25, 30, 40, 100, -2};
 		int[] arrayActual = addNumber(array, -2);
 		
@@ -78,6 +78,7 @@ class ArraysTest {
 	void arrayCopyTest() {
 		int[] array1 = {3, 10, 20, 15};
 		int[] expected = {10, 25, 10, 20, 100};
+//		int[] array =    {10, 25, 30, 40, 100};
 		int[] arrayCopy = Arrays.copyOf(array, array.length); //creates a copy of array with new link
 		//must use this method for homework(insertNumnber, removeNumber)
 		System.arraycopy(array1, 1, arrayCopy, 2, 2);
@@ -90,6 +91,11 @@ class ArraysTest {
 		//TODO
 		//Homework: read documentation at oracle and 
 		//write test for Arrays.binarySearch for int[]
+		assertEquals(-6, Arrays.binarySearch(array, 150));
+		assertEquals(0, Arrays.binarySearch(array, 10));
+		assertEquals(-4, Arrays.binarySearch(array, 35));
+		assertEquals(0, Arrays.binarySearch(new int[] {-10, 1, 2, 3, 4, 5}, -10));
+		assertEquals(-2, Arrays.binarySearch(new int[] {-10, 1, 2, 3, 4, 5}, 0));
 	}
 
 }
