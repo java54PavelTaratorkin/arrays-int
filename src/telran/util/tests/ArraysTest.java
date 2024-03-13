@@ -99,6 +99,7 @@ class ArraysTest {
 		assertEquals(-4, Arrays.binarySearch(array, 35));
 		assertEquals(0, Arrays.binarySearch(new int[] {-10, 1, 2, 3, 4, 5}, -10));
 		assertEquals(-2, Arrays.binarySearch(new int[] {-10, 1, 2, 3, 4, 5}, 0));
+		assertEquals(-1, Arrays.binarySearch(new int[] {}, -100));
 	}
 
 }

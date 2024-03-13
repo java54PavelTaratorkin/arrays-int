@@ -19,7 +19,8 @@ public class ArraysInt {
 		
 		if (index > -1 && index <= array.length) {
 			newArray = new int[array.length + 1];			
-			System.arraycopy(new int[] {number}, 0, newArray, index, 1);
+//			System.arraycopy(new int[] {number}, 0, newArray, index, 1);
+			newArray[index] = number;
 			System.arraycopy(array, 0, newArray, 0, index);
 			System.arraycopy(array, index, newArray, index + 1, array.length - index);
 		}
@@ -45,9 +46,13 @@ public class ArraysInt {
 		//TODO
 		//insert number into sorted array with keeping the sorted order
 		//apply method binarySearch of the class Arrays
-		int index;
+//		int index;
+		
+		int index = Arrays.binarySearch(sortedArray, number);
+		if (index < 0) index = -(index + 1);
 				
-		return ArraysInt.insertNumber(sortedArray, 
-				(index = Arrays.binarySearch(sortedArray, number)) >= 0 ? index : -index - 1, number);
+//		return ArraysInt.insertNumber(sortedArray, 
+//				(index = Arrays.binarySearch(sortedArray, number)) >= 0 ? index : -index - 1, number);
+		return ArraysInt.insertNumber(sortedArray, index, number);
 	}
 }
