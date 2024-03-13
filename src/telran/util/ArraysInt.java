@@ -12,51 +12,42 @@ public class ArraysInt {
 		return newArray;
 	}
 	
-	private static int[] insertRemove(int[] array, int index, int number, boolean insert, boolean remove) {
-		int insVal = insert ? 1 : 0;
-		int remVal = remove ? -1 : 0;
-
-		int[] newArray = new int[array.length + insVal + remVal];
-
-		if (index == array.length + remVal) {
-			System.arraycopy(array, 0, newArray, 0, array.length + remVal);
-			if (insert) 
-				System.arraycopy(new int[] {number}, 0, newArray, array.length, 1);
-		} else if (index == 0) {
-			System.arraycopy(array, -remVal, newArray, insVal, array.length + remVal);
-			if (insert)
-				System.arraycopy(new int[] {number}, 0, newArray, 0, 1);
-		} else if (index > 0 && index < array.length + remVal) {
-			System.arraycopy(array, 0, newArray, 0, index);
-			System.arraycopy(array, index + -remVal, newArray, index + insVal, array.length - index + remVal);
-			if (insert)
-				System.arraycopy(new int[] {number}, 0, newArray, index, 1);
-		}
-		
-		return newArray;
-	}
-	
 	public static int[] insertNumber(int[] array, int index, int number) {
 		//TODO
 		//apply method arraycopy of class System
-		return ArraysInt.insertRemove(array, index, number, true, false);
+		int[] newArray = array;
+		
+		if (index > -1 && index <= array.length) {
+			newArray = new int[array.length + 1];			
+			System.arraycopy(new int[] {number}, 0, newArray, index, 1);
+			System.arraycopy(array, 0, newArray, 0, index);
+			System.arraycopy(array, index, newArray, index + 1, array.length - index);
+		}
+
+		return newArray;
 	}
 	
 	public static int[] removeNumber(int[] array, int index) {
 		//TODO
 		//apply method arraycopy of class System
-		return ArraysInt.insertRemove(array, index, 0, false, true);
+		int[] newArray = array;
+		
+		if (index > -1 && index < array.length) {
+			newArray = new int[array.length - 1];
+			System.arraycopy(array, 0, newArray, 0, index);
+			System.arraycopy(array, index + 1, newArray, index, array.length - index - 1);
+		}
+
+		return newArray;
 	}
 	
 	public static int[] insertSorted(int[] sortedArray, int number) {
 		//TODO
 		//insert number into sorted array with keeping the sorted order
 		//apply method binarySearch of the class Arrays
-			
-		int index = Arrays.binarySearch(sortedArray, number) >= 0 ? 
-				Arrays.binarySearch(sortedArray, number): 
-					-Arrays.binarySearch(sortedArray, number) - 1;
-					
-		return ArraysInt.insertNumber(sortedArray, index, number);
+		int index;
+				
+		return ArraysInt.insertNumber(sortedArray, 
+				(index = Arrays.binarySearch(sortedArray, number)) >= 0 ? index : -index - 1, number);
 	}
 }
