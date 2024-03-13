@@ -20,6 +20,7 @@ class ArraysTest {
 	
 	@Test
 	void insertNumberTest() {
+		// {10, 25, 30, 40, 100};
 		int[] arrayExpectedLast = {10, 25, 30, 40, 100, 25};
 		int[] arrayExpectedFirst = {25, 10, 25, 30, 40, 100};
 		int[] arrayExpectedMiddle = {10, 25, 30, 25, 40, 100};
@@ -34,6 +35,7 @@ class ArraysTest {
 	
 	@Test
 	void removeNumberTest() {
+		// {10, 25, 30, 40, 100};
 		int[] arrayExpectedLast = {10, 25, 30, 40};
 		int[] arrayExpectedFirst = {25, 30, 40, 100};
 		int[] arrayExpectedMiddle = {10, 25, 40, 100};
@@ -48,6 +50,7 @@ class ArraysTest {
 	
 	@Test
 	void insertSortedTest() {
+		// {10, 25, 30, 40, 100};
 		int[] arrayExpectedLast = {10, 25, 30, 40, 100, 150};
 		int[] arrayExpectedFirst = {10, 10, 25, 30, 40, 100};
 		int[] arrayExpectedMiddle = {10, 25, 30, 35, 40, 100};

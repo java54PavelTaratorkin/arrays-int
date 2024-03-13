@@ -12,39 +12,40 @@ public class ArraysInt {
 		return newArray;
 	}
 	
+	private static int[] insertRemove(int[] array, int index, int number, boolean insert, boolean remove) {
+		int insVal = insert ? 1 : 0;
+		int remVal = remove ? -1 : 0;
+
+		int[] newArray = new int[array.length + insVal + remVal];
+
+		if (index == array.length + remVal) {
+			System.arraycopy(array, 0, newArray, 0, array.length + remVal);
+			if (insert) 
+				System.arraycopy(new int[] {number}, 0, newArray, array.length, 1);
+		} else if (index == 0) {
+			System.arraycopy(array, -remVal, newArray, insVal, array.length + remVal);
+			if (insert)
+				System.arraycopy(new int[] {number}, 0, newArray, 0, 1);
+		} else if (index > 0 && index < array.length + remVal) {
+			System.arraycopy(array, 0, newArray, 0, index);
+			System.arraycopy(array, index + -remVal, newArray, index + insVal, array.length - index + remVal);
+			if (insert)
+				System.arraycopy(new int[] {number}, 0, newArray, index, 1);
+		}
+		
+		return newArray;
+	}
+	
 	public static int[] insertNumber(int[] array, int index, int number) {
 		//TODO
 		//apply method arraycopy of class System
-		int[] newArray = new int[array.length + 1];
-		if (index == array.length) {
-			System.arraycopy(array, 0, newArray, 0, array.length);
-			System.arraycopy(new int[] {number}, 0, newArray, array.length, 1);
-		} else if (index == 0) {
-			System.arraycopy(array, 0, newArray, 1, array.length);
-			System.arraycopy(new int[] {number}, 0, newArray, 0, 1);
-		} else if (index > 0 && index < array.length) {
-			System.arraycopy(array, 0, newArray, 0, index);
-			System.arraycopy(new int[] {number}, 0, newArray, index, 1);
-			System.arraycopy(array, index, newArray, index + 1, array.length - index);
-		}
-
-		return newArray;
+		return ArraysInt.insertRemove(array, index, number, true, false);
 	}
 	
 	public static int[] removeNumber(int[] array, int index) {
 		//TODO
 		//apply method arraycopy of class System
-		int[] newArray = new int[array.length - 1];
-		if (index == array.length - 1) {
-			System.arraycopy(array, 0, newArray, 0, array.length - 1);
-		} else if (index == 0) {
-			System.arraycopy(array, 1, newArray, 0, array.length - 1);
-		} else if (index > 0 && index < array.length - 1) {
-			System.arraycopy(array, 0, newArray, 0, index);
-			System.arraycopy(array, index + 1, newArray, index, array.length - index - 1);
-		}
-
-		return newArray;
+		return ArraysInt.insertRemove(array, index, 0, false, true);
 	}
 	
 	public static int[] insertSorted(int[] sortedArray, int number) {
